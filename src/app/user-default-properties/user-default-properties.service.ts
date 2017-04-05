@@ -5,12 +5,13 @@ import { AppSettingsService } from '../app-settings/app-settings.service';
 import { UserService } from '../openmrs-api/user.service';
 import { User } from '../models/user.model';
 import { LocalStorageService } from '../utils/local-storage.service';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 
 @Injectable()
 export class UserDefaultPropertiesService {
 
+  locationSubject = new BehaviorSubject<any>('');
   private user: User;
 
   constructor(private userService: UserService
@@ -50,12 +51,9 @@ export class UserDefaultPropertiesService {
     if (propertyKey === 'userDefaultLocation') {
 
       propertyKey = propertyKey + this.getAuthenticatedUser().display;
-
+      this.locationSubject.next(property);
       this.localStorage.setItem(propertyKey, property);
     }
 
   }
 }
-
-
-
