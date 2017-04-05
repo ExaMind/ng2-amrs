@@ -152,7 +152,6 @@ export class MonthlyScheduleComponent implements OnInit {
   }
 
   public dayClicked({ date, events }: { date: Date, events: CalendarEvent[] }): void {
-    this.getAppointments();
 
   }
 }
