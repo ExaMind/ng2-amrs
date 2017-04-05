@@ -1,0 +1,48 @@
+<div class="wrapper">
+	<p-growl [value]="msgs"></p-growl>
+	<p-accordion>
+		<p-accordionTab [selected]="true">
+      <p-header>
+        Demographics
+        <button pButton type="button" (click)="demographics.showDialog()"
+                class="ui-button-info" label="Edit" style="float: right"></button>
+      </p-header>
+      <edit-demographics #demographics></edit-demographics>
+			<patient-demographics></patient-demographics>
+		</p-accordionTab>
+    <p-accordionTab>
+      <p-header>
+        Contacts
+        <button pButton type="button" (click)="timer.showDialog()"
+                class="ui-button-info" label="Edit" style="float: right"></button>
+      </p-header>
+      <edit-contacts-info #timer>
+      </edit-contacts-info>
+
+      <contacts-info>
+
+      </contacts-info>
+    </p-accordionTab>
+		<p-accordionTab >
+      <p-header>
+        Address
+        <button pButton type="button" (click)="address.showDialog()"
+                class="ui-button-info" label="Edit" style="float: right"></button>
+      </p-header>
+      <edit-address #address></edit-address>
+			<address></address>
+		</p-accordionTab>
+		<p-accordionTab >
+      <p-header>
+        Identifiers
+     <button pButton type="button" (click)="identifiers.showDialog()"
+       class="ui-button-info" label="Edit" style="float: right"></button>
+           </p-header>
+      <edit-identifiers #identifiers></edit-identifiers>
+			<patient-identifier [identifiers]="patient?._identifier"></patient-identifier>
+		</p-accordionTab>
+		<p-accordionTab header=" Relationships " [selected]="false">
+			<patient-relationships></patient-relationships>
+		</p-accordionTab>
+	</p-accordion>
+</div>

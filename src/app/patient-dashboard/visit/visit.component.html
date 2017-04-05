@@ -1,0 +1,67 @@
+<div>
+  <div [ngBusy]="{busy:[loadingVisitTypes, visitBusy],message:'Hang in there............'}"></div>
+  <p-dialog header="Warning!" [(visible)]="showDialog" modal="true" width="400" responsive="true">
+    <div class="text-bold">
+      <h3 *ngIf="confirmCancel" ><span class="fa-lg">
+							<i class="fa fa-exclamation-triangle"></i>
+					</span> Canceling a visit deletes all encounters associated with it.</h3>
+      <h3 *ngIf="confirmEndVisit" ><span class="fa-lg">
+							<i class="fa fa-exclamation-triangle"></i>
+					</span>Are you sure?</h3>
+    </div>
+
+    <br>
+    <footer>
+      <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+        <button (click)="onYes()" type="button" id="onYes" class="btn btn-primary">Yes</button>
+        <button (click)="onNo()" type="button" id="onNo" class="btn btn-danger">No</button>
+      </div>
+    </footer>
+
+  </p-dialog>
+  <div *ngFor="let error of errors" class="alert alert-danger alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button> {{error.message}}
+  </div>
+
+  <div *ngIf="!visit">
+    <div class="visit-label">
+      <h3>Select visit type</h3>
+    </div>
+    <table class='table'>
+      <tr *ngFor="let visitType of visitTypes">
+        <td>
+          {{visitType.display}}
+        </td>
+        <td>
+          {{visitType.description}}
+        </td>
+        <td>
+          <button id="startButton" (click)="startVisit(visitType.uuid)" class='btn btn-primary'>Start Visit</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div *ngIf="visit">
+    <div class="visit-panel-heading">
+      <h3><span>Started At:{{visit.startDatetime | date:'dd-MM-yyyy hh:mm'}}</span>
+        <span *ngIf="visit.stopDatetime">Ended At:{{visit.stopDatetime | date:'dd-MM-yyyy hh:mm'}}</span>
+        <button id="cancelVisitButtonTop" (click)="cancelVisit()" class='btn btn-danger'>Cancel Visit</button>
+        <button *ngIf="!visit.stopDatetime" id="endVisitButtonTop" (click)="endVisit()" class='btn btn-primary'>
+          End Visit
+        </button>
+      </h3>
+    </div>
+    <div class="visit-panel-body">
+      <encounter-list *ngIf="visit.encounters" [encounters]="visit.encounters" (onEncounterSelected)="encounterSelected($event)"></encounter-list>
+      <div>
+        <form-list [excludedForms]="excludedForms" (onFormSelected)="formSelected($event)"></form-list>
+      </div>
+    </div>
+    <div class="visit-panel-footer">
+      <button id="cancelVisitButton" (click)="cancelVisit()" class='btn btn-danger'>Cancel Visit</button>
+      <button *ngIf="!visit.stopDatetime" id="endVisitButton" (click)="endVisit()" class='btn btn-primary'>End Visit
+        Visit
+      </button>
+    </div>
+  </div>
+</div>

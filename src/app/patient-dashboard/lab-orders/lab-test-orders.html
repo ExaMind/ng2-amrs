@@ -1,0 +1,34 @@
+<div>
+  <div [ngBusy]="{busy:[fetchingResults, isBusy],message:'Loading orders...'}"></div>
+  <div>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Order Date</th>
+          <th>Order No</th>
+          <th>Test Name</th>
+          <th>Ordered By</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let order of labOrders | paginate: { itemsPerPage: 10, currentPage: page }; let i = index; ">
+          <td>
+            {{order.dateActivated | date:'dd/MM/yyyy'}}
+          </td>
+          <td>
+            {{order.orderNumber}}
+          </td>
+          <td>
+            {{order.display}}
+          </td>
+          <td>
+            {{order.orderer.display}}
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <pagination-controls (pageChange)="page = $event" style="cursor: pointer;"></pagination-controls>
+  </div>
+</div>

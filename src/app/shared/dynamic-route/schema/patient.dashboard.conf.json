@@ -1,0 +1,106 @@
+{
+  "id": "patientDashboard",
+  "name": "Patient Dashboard",
+  "baseRoute": "patient-dashboard",
+  "programs": [
+    {
+      "programName": "General Info",
+      "programUuid": "general-uuid",
+      "baseRoute": "general",
+      "requiresPatientEnrollment": false,
+      "routes": [
+        {
+          "url": "patient-info",
+          "label": "Patient Info",
+          "icon": "fa fa-clipboard"
+        },
+        {
+          "url": "patient-vitals",
+          "label": "Vitals",
+          "icon": "fa fa-heartbeat"
+        },
+        {
+          "url": "patient-encounters",
+          "label": "Encounters",
+          "icon": "icon-i-immunizations"
+        },
+        {
+          "url": "forms",
+          "label": "Forms",
+          "icon": "fa fa-file"
+        },
+        {
+          "url": "lab-data-summary",
+          "label": "Lab Data Summary",
+          "icon": "icon-i-laboratory"
+        },
+        {
+          "url": "lab-orders",
+          "label": "Lab Orders",
+          "icon": "icon-i-pathology"
+        },
+        {
+          "url": "programs",
+          "label": "Programs",
+          "icon": "icon-i-family-practice"
+        }
+      ]
+    },
+    {
+      "programName": "HIV",
+      "programUuid": "781d85b0-1359-11df-a1f1-0026b9348838",
+      "baseRoute": "hiv",
+      "requiresPatientEnrollment": true,
+      "routes": [
+        {
+          "url": "visit",
+          "label": "Visit",
+          "icon": "icon-i-outpatient"
+        },
+        {
+          "url": "patient-vitals",
+          "label": "Vitals",
+          "icon": "fa fa-heartbeat"
+        },
+        {
+          "url": "hiv-summary",
+          "label": "HIV Summary",
+          "icon": "fa fa-medkit"
+        },
+        {
+          "url": "hiv-clinical-summary",
+          "label": "HIV Clinical Summary",
+          "icon": "fa fa-file-pdf-o"
+        },
+        {
+          "url": "clinical-notes",
+          "label": "Clinical Notes",
+          "icon": "fa fa-book"
+        },
+        {
+          "url": "lab-data-summary",
+          "label": "Lab Data Summary",
+          "icon": "icon-i-laboratory"
+        },
+        {
+          "url": "lab-orders",
+          "label": "Lab Orders",
+          "icon": "icon-i-pathology"
+        }
+      ]
+    },
+    {
+      "programName": "Oncology",
+      "programUuid": "onc-uuid",
+      "baseRoute": "oncology",
+      "requiresPatientEnrollment": true,
+      "routes": [
+        {
+          "url": "oncology-summary",
+          "label": "Oncology Summary",
+          "icon": "icon-i-oncology"
+        }
+      ]
+    }
+  ]
+}
