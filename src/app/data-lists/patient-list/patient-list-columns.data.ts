@@ -1,35 +1,44 @@
-
 export class PatientListColumns {
 
     public static columns() {
-
         return [
-            {
-                headerName: '#',
-                field: '#',
-                width: 150
+          {
+            headerName: '#',
+            width: 60,
+            pinned: true,
+            cellRenderer: (column) => {
+              return column.rowIndex + 1;
             },
+            field: '#'
+          },
             {
                 headerName: 'Identifiers',
                 field: 'identifiers',
-                width: 300,
+                width: 150,
                 cellStyle: {
                     'white-space': 'normal'
-                }
+                },
+                pinned: true,
+                filter: 'text'
             },
             {
                 headerName: 'Person Name',
+                width: 120,
                 field: 'person_name',
                 cellStyle: {
                     'white-space': 'normal'
-                }
+                },
+                pinned: true,
+                filter: 'text'
             },
             {
                 headerName: 'Gender',
+                width: 75,
                 field: 'gender'
             },
             {
                 headerName: 'Age',
+                width: 60,
                 field: 'age'
             }
         ];
