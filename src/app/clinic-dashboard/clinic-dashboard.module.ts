@@ -15,6 +15,11 @@ import { DailyScheduleVisitsComponent } from './daily-schedule/daily-schedule-vi
 import { DailyScheduleAppointmentsComponent }
   from './daily-schedule/daily-schedule-appointments.component';
 import { DailyScheduleNotReturned } from './daily-schedule/daily-schedule-not-returned.component';
+import {
+  DefaulterListResourceService
+} from
+  '../etl-api/defaulter-list-resource.service';
+import { DefaulterListComponent } from './defaulter-list/defaulter-list.component';
 import { ClinicDashboardGuard } from './clinic-dashboard.guard';
 import { ClinicDashboardComponent } from './clinic-dashboard.component';
 import { MonthlyScheduleComponent } from './monthly-schedule/monthly-schedule.component';
@@ -34,17 +39,36 @@ import {
 import { DashboardFiltersComponent } from './dashboard-filters/dashboard-filters.component';
 import { OpenmrsApi } from '../openmrs-api/openmrs-api.module';
 
-import { TabViewModule, FieldsetModule, ButtonModule, GrowlModule } from 'primeng/primeng';
+import { TabViewModule, FieldsetModule, ButtonModule, GrowlModule,
+  AccordionModule } from 'primeng/primeng';
 import { ReportingUtilities } from '../reporting-utilities/reporting-utilities.module';
 import { ClinicDashboardCacheService } from './services/clinic-dashboard-cache.service';
 import { SelectModule } from 'angular2-select';
-import { BusyModule } from 'angular2-busy';
+import { BusyModule, BusyConfig } from 'angular2-busy';
 import { AgGridModule } from 'ag-grid-angular/main';
 import { DataListsModule } from '../data-lists/data-lists.module';
 import { ClinicLabOrdersComponent } from './clinic-lab-orders/clinic-lab-orders.component';
 import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
 import { MdTabsModule } from '@angular/material';
 import { NgamrsSharedModule } from '../shared/ngamrs-shared.module';
+import { PatientStatusOverviewComponent
+} from './clinical-summary-visualization/patient-status-overview/patient-status-overview.component';
+import { PatientStatusIndicatorDefComponent
+} from './clinical-summary-visualization/patient-status-overview/indicator-definition.component';
+import { EtlApi } from '../etl-api/etl-api.module';
+import { HivCareComparativeOverviewComponent
+} from
+ './clinical-summary-visualization/hiv-care-comparative-overview/hiv-care-overview.component';
+import { HivCareTabularViewComponent
+} from
+ './clinical-summary-visualization/hiv-care-comparative-overview/hiv-care-tabularview.component';
+import { VisualizationPatientListComponent
+} from
+'./clinical-summary-visualization/visualization-patient-list/visualization.patient-list.component';
+import { ClinicalSummaryVisualizationService
+} from './services/clinical-summary-visualization.service';
+
+
 
 @NgModule({
   imports: [
@@ -58,11 +82,23 @@ import { NgamrsSharedModule } from '../shared/ngamrs-shared.module';
     FieldsetModule,
     ButtonModule,
     GrowlModule,
+    AccordionModule,
     OpenmrsApi,
+    EtlApi,
     SelectModule,
     Angulartics2Module.forChild(),
+    NgamrsSharedModule,
     ChartModule.forRoot(require('highcharts')),
-    BusyModule,
+    BusyModule.forRoot(
+      new BusyConfig({
+        message: 'Please Wait...',
+        backdrop: true,
+        delay: 200,
+        minDuration: 600,
+        wrapperClass: 'my-class',
+
+      })
+    ),
     CalendarModule.forRoot(),
     AgGridModule.withComponents([]),
     NgamrsSharedModule,
@@ -74,6 +110,9 @@ import { NgamrsSharedModule } from '../shared/ngamrs-shared.module';
     MonthlyScheduleComponent,
     VisualizationComponent,
     ArtOverviewComponent,
+    HivCareComparativeOverviewComponent,
+    VisualizationPatientListComponent,
+    HivCareTabularViewComponent,
     DateRangeComponent,
     RangeSliderComponent,
     DashboardFiltersComponent,
@@ -83,28 +122,41 @@ import { NgamrsSharedModule } from '../shared/ngamrs-shared.module';
     ClinicLabOrdersComponent,
     DailyScheduleAppointmentsComponent,
     DailyScheduleNotReturned,
-    DailyScheduleVisitsComponent
+    DailyScheduleVisitsComponent,
+    DefaulterListComponent,
+    PatientStatusOverviewComponent,
+    PatientStatusIndicatorDefComponent
   ],
   providers: [
     ClinicDashboardGuard,
     DailyScheduleResourceService,
     ClinicDashboardCacheService,
+    DefaulterListResourceService,
+    ClinicalSummaryVisualizationService,
+    ClinicDashboardCacheService
   ],
   exports: [
+    BusyModule,
     DailyScheduleComponent,
     MonthlyScheduleComponent,
     VisualizationComponent,
+    ArtOverviewComponent,
+    HivCareComparativeOverviewComponent,
+    VisualizationPatientListComponent,
+    HivCareTabularViewComponent,
     DateRangeComponent,
     RangeSliderComponent,
     DashboardFiltersComponent,
     IndicatorSelectComponent,
     GenderSelectComponent,
-    ClinicDashboardComponent,
     ClinicLabOrdersComponent,
-    ClinicDashboardComponent,
     DailyScheduleAppointmentsComponent,
     DailyScheduleNotReturned,
-    DailyScheduleVisitsComponent
+    DailyScheduleVisitsComponent,
+    ClinicDashboardComponent,
+    DefaulterListComponent,
+    PatientStatusOverviewComponent,
+    PatientStatusIndicatorDefComponent
   ],
 })
 export class ClinicDashboardModule {

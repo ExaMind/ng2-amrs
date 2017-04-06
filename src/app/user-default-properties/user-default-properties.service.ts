@@ -7,7 +7,6 @@ import { User } from '../models/user.model';
 import { LocalStorageService } from '../utils/local-storage.service';
 import { Observable, BehaviorSubject } from 'rxjs';
 
-
 @Injectable()
 export class UserDefaultPropertiesService {
 
@@ -49,11 +48,10 @@ export class UserDefaultPropertiesService {
   setUserProperty(propertyKey: string, property: string) {
 
     if (propertyKey === 'userDefaultLocation') {
-
       propertyKey = propertyKey + this.getAuthenticatedUser().display;
       this.locationSubject.next(property);
       this.localStorage.setItem(propertyKey, property);
     }
-
   }
+
 }

@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { Response } from '@angular/http';
+
 import { Router, NavigationEnd } from '@angular/router';
 import { Subject } from 'rxjs';
+
 
 import { DynamicRoutesService } from '../shared/dynamic-route/dynamic-routes.service';
 import { DynamicRouteModel } from '../shared/dynamic-route/dynamic-route.model';
@@ -41,9 +43,8 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
     private dynamicRoutesService: DynamicRoutesService,
     private authenticationService: AuthenticationService,
     private userDefaultSettingsService: UserDefaultPropertiesService,
-    private userService: UserService, private appState: AppState) {
+    private userService: UserService, private appState: AppState) {}
 
-  }
   ngOnDestroy() {
     this.appSubscription.unsubscribe();
   }
